@@ -1,0 +1,15 @@
+# Create a Secret based on existing credentials
+{
+DOCKER_REGISTRY_SERVER=docker.io
+DOCKER_USER=odris
+DOCKER_EMAIL=info@odrsystems.co.ke
+DOCKER_PASSWORD=rvssian@3
+
+kubectl create secret docker-registry desmond-registry \
+  --docker-server=$DOCKER_REGISTRY_SERVER \
+  --docker-username=$DOCKER_USER \
+  --docker-password=$DOCKER_PASSWORD \
+  --docker-email=$DOCKER_EMAIL
+}
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.44.0/deploy/static/provider/cloud/deploy.yaml

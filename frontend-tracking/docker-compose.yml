@@ -1,0 +1,17 @@
+version: "3.8"
+networks:
+  my_network_name:
+    name: my_network_name
+    external: true
+
+services:
+    app:
+        container_name: database-server
+        build: .
+        command: python run.py
+        ports:
+            - "5000:5000"
+        volumes:
+            - .:/python-flask
+        networks:
+            - my_network_name

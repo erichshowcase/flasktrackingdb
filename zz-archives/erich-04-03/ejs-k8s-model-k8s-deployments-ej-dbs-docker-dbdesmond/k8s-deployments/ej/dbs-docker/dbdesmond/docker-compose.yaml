@@ -1,0 +1,28 @@
+version: "3.8"
+
+networks:
+  my_network_name:
+    name: my_network_name
+    external: false
+
+services:
+  dbserver:
+    hostname: ${DBSERVER_HOSTNAME}
+    container_name: ${DBSERVER}
+    build:
+      context: .
+      args:
+        - DB_ROOT_PW=${DBUSER_SA_PASS}
+        - DB_PW=${DBUSER_SA_PASS}
+    ports:
+      - ${MYSQL_PORT}:3306
+    environment:
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PW}
+      MYSQL_DATABASE: ejs
+      MYSQL_USER: dbuser_sa
+      MYSQL_PASSWORD: ${DB_PW}
+    volumes:
+      - ./ejs.sql:/docker-entrypoint-initdb.d/ejs.sql
+    networks:
+      - my_network_name
